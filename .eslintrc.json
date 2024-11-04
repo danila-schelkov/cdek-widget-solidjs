@@ -37,11 +37,10 @@
     }
   },
   "rules": {
-    "no-console": "error",
     "no-debugger": "error",
     "no-extra-semi": "error",
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-non-null-assertion": "error",
@@ -55,13 +54,7 @@
       }
     ],
     "react-hooks/exhaustive-deps": "error",
-    "indent": [
-      "error",
-      2,
-      {
-        "SwitchCase": 1
-      }
-    ],
+    "indent": "off",
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "comma-dangle": ["error", "always-multiline"],

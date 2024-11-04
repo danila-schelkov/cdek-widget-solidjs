@@ -1,4 +1,5 @@
+import CdekWidget from '@/src/widgets/CDEKWidget';
 const Home: React.FC = () => {
-  return <p>page</p>;
+  return <CdekWidget />;
 };
 export default Home;
