@@ -1,7 +1,7 @@
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import eslintComments from "eslint-plugin-eslint-comments";
-import noOnlyTests from "eslint-plugin-no-only-tests";
+import noOnlyTests from "@eslint-community/eslint-plugin-no-only-tests";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 import { includeIgnoreFile } from "@eslint/compat";
