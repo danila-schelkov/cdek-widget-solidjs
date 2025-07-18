@@ -27,6 +27,7 @@ const createWidget = (
 
     // Function to log errors
     const logError = (message: string, error: any) => {
+        // eslint-disable-next-line no-console
         console.error(message, error);
     };
 
