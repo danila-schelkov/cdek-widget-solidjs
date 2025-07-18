@@ -1,3 +1,33 @@
+<p>
+  <img width="100%" src="https://assets.solidjs.com/banner?type=cdek-widget-solidjs&background=tiles&project=%20" alt="cdek-widget-solidjs">
+</p>
+
+# cdek-widget-solidjs
+
+[![bun](https://img.shields.io/badge/maintained%20with-bun-cc00ff.svg?style=for-the-badge&logo=bun)](https://bun.sh/)
+
+A small library that wraps CDEK-widget for solidjs users
+
+## Quick start
+
+Install it:
+
+```bash
+npm i cdek-widget-solidjs
+# or
+yarn add cdek-widget-solidjs
+# or
+pnpm add cdek-widget-solidjs
+# or
+bun i cdek-widget-solidjs
+```
+
+Use it:
+
+```tsx
+import CdekWidget from 'cdek-widget-solidjs';
+```
+
 # Интеграция CDEK 3.0 в Next.js | Шаг за шагом
 
 Репозиторий содержит пример реализации виджета доставки CDEK с использованием Next.js.
@@ -13,30 +43,34 @@
 3. Во всплывающем окне выберите сервис «JavaScript API и HTTP Геокодер».
 4. Сохраните полученный ключ для дальнейшего использования.
 
-> ⚠️ **Важно!**  
-> Обязательно задайте параметр HTTP Referrer, равный адресу вашего сайта для ключа.  
+> ⚠️ **Важно!**
+> Обязательно задайте параметр HTTP Referrer, равный адресу вашего сайта для ключа.
 > Подробнее: [документации Яндекс](https://yandex.ru/dev/jsapi30/doc/ru/limit).
 
 ## Шаг 2: Получение тестовых ключей CDEK
+
 Для интеграции с CDEK вам потребуется получить учетные данные (логин и пароль) для доступа к API.
 
 В тестовом режиме можно использовать следующие данные:
 
-| Параметр           | Значение                                           |
-|--------------------|----------------------------------------------------|
-| **Account**        | `wqGwiQx0gg8mLtiEKsUinjVSICCjtTEP`                 |
-| **Secure password**| `RmAmgvSgSl1yirlz9QupbzOJVqhCxcP5`                 |
+| Параметр            | Значение                           |
+| ------------------- | ---------------------------------- |
+| **Account**         | `wqGwiQx0gg8mLtiEKsUinjVSICCjtTEP` |
+| **Secure password** | `RmAmgvSgSl1yirlz9QupbzOJVqhCxcP5` |
 
 В реальном проекте необходимо получить свои учетные данные в личном кабинете CDEK, чтобы использовать сервис в продакшене.
 
-## Шаг 3: Установка скрипта 
+## Шаг 3: Установка скрипта
 
 Для работы виджета необходимо подключить скрипт CDEK. Добавьте следующий код в секцию <head> основного файла вашего приложения
 
 ```html
 <head>
-  <Script src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3" strategy="beforeInteractive" />
-</head> 
+  <script
+    src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
+    strategy="beforeInteractive"
+  />
+</head>
 ```
 
 ## Шаг 4: Создание компонента для виджета CDEK
@@ -55,43 +89,48 @@
 
 `https://example.com/service.php`
 
-[Полный код компонента service.php](https://github.com/disa4148/cdek-widget-3.0/blob/main/service.php)
+[Полный код компонента service.php](/blob/main/service.php)
 
-Изначально в файле service.php установлены тестовые ключи (строки [9](https://github.com/disa4148/cdek-widget-3.0/blob/main/service.php#L9) и [13](https://github.com/disa4148/cdek-widget-3.0/blob/main/service.php#L13)). Для использования в продакшене замените их на ваши личные ключи, которые вы получите после заключения договора со CDEK.
+Изначально в файле service.php установлены тестовые ключи (строки [9](/blob/main/service.php#L9) и [13](/blob/main/service.php#L13)). Для использования в продакшене замените их на ваши личные ключи, которые вы получите после заключения договора со CDEK.
 
-> ⚠️ **Примечание:**  
-> При работе с тестовыми данными запросы необходимо отправлять на `https://api.edu.cdek.ru/v2`.  
-> Для боевого режима используйте `https://api.cdek.ru/v2`. Убедитесь, что вы изменили URL в файле [`service.php: line42`](https://github.com/disa4148/cdek-widget-3.0/blob/main/service.php#L42) перед переходом на продакшн, чтобы избежать ошибок в интеграции.
+> ⚠️ **Примечание:**
+> При работе с тестовыми данными запросы необходимо отправлять на `https://api.edu.cdek.ru/v2`.
+> Для боевого режима используйте `https://api.cdek.ru/v2`. Убедитесь, что вы изменили URL в файле [`service.php:42`](/blob/main/service.php#L42) перед переходом на продакшн, чтобы избежать ошибок в интеграции.
 
 ## Установка и настройка
 
 ### 1. Склонируйте репозиторий:
-   ```bash
-   git clone https://github.com/disa4148/cdek-widget-3.0.git
-   cd cdek-widget-3.0
-   ```
+
+```bash
+git clone https://github.com/danila-schelkov/cdek-widget-solidjs.git
+cd cdek-widget-solidjs
+```
 
 ### 2. Установите зависимости:
-   ```bash
-   pnpm install
-   ```
+
+```bash
+pnpm install
+```
 
 ### 3. Создайте файл `.env` в корне проекта и добавьте API-ключ Яндекс.Карт:
-   ```env
-   NEXT_PUBLIC_YANDEX_MAPS_API_KEY=ваш_ключ_яндекс_карт
-   ```
 
-###  4. Запуск проекта
+```env
+NEXT_PUBLIC_YANDEX_MAPS_API_KEY=ваш_ключ_яндекс_карт
+```
+
+### 4. Запуск проекта
 
 Запуск клиентской части приложения
-  ```bash
-  pnpm dev
-  ```
+
+```bash
+bun run dev
+```
 
 Запуск серверной части (PHP):
-  ```bash
-  php -S localhost:8000
-  ```
+
+```bash
+php -S localhost:8000
+```
 
 ## Тестирование и отладка
 
@@ -101,7 +140,7 @@
 
 ## Поддержка и контакты
 
-Если у вас возникли вопросы или вы обнаружили ошибку, пожалуйста, создайте [Issue](https://github.com/disa4148/cdek-widget-3.0/issues) в репозитории или свяжитесь со мной.
+Если у вас возникли вопросы или вы обнаружили ошибку, пожалуйста, создайте [Issue](/issues) в репозитории или свяжитесь со мной.
 
 ## Улучшения
 
@@ -109,8 +148,4 @@
 
 ## Лицензия
 
-Этот репозиторий лицензирован под MIT License. Подробности см. в файле [LICENSE](https://github.com/disa4148/cdek-widget-3.0/blob/main/LICENSE.txt).
-
-
-
-
+Этот репозиторий лицензирован под MIT License. Подробности см. в файле [LICENSE](/LICENSE.txt).

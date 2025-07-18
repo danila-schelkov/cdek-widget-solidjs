@@ -1,41 +1,88 @@
 {
-  "name": "example-project-structure",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint --fix",
-    "prepare": "husky && husky install",
-    "check-types": "tsc --pretty --noEmit",
-    "check-format": "prettier --check",
-    "check-lint": "eslint . --ext ts --ext tsx --ext js",
-    "format": "prettier --write .",
-    "test-all": "pnpm run check-format && pnpm run check-lint && pnpm run check-types && pnpm run build"
+  "name": "cdek-widget-solidjs",
+  "version": "0.0.0",
+  "description": "A small library that wraps CDEK-widget for solidjs users",
+  "license": "MIT",
+  "author": "danila-schelkov",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danila-schelkov/cdek-widget-solidjs.git"
   },
-  "dependencies": {
-    "@radix-ui/react-slot": "^1.0.2",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.395.0",
-    "next": "14.2.4",
-    "react": "^18",
-    "react-dom": "^18",
-    "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+  "homepage": "https://github.com/danila-schelkov/cdek-widget-solidjs#readme",
+  "bugs": {
+    "url": "https://github.com/danila-schelkov/cdek-widget-solidjs/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "private": false,
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "browser": {},
+  "exports": {
+    "solid": {
+      "development": "./dist/dev.jsx",
+      "import": "./dist/index.jsx"
+    },
+    "development": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/dev.js"
+      }
+    },
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "typesVersions": {},
+  "scripts": {
+    "dev": "vite serve dev",
+    "build": "tsup",
+    "test": "concurrently pnpm:test:*",
+    "test:client": "vitest",
+    "test:ssr": "pnpm run test:client --mode ssr",
+    "prepublishOnly": "pnpm build",
+    "format": "prettier --ignore-path .gitignore -w \"src/**/*.{js,ts,json,css,tsx,jsx}\" \"dev/**/*.{js,ts,json,css,tsx,jsx}\"",
+    "lint": "concurrently pnpm:lint:*",
+    "lint:code": "eslint --ignore-path .gitignore --max-warnings 0 src/**/*.{js,ts,tsx,jsx}",
+    "lint:types": "tsc --noEmit",
+    "update-deps": "pnpm up -Li"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.6.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4",
-    "husky": "^8.0.0",
-    "postcss": "^8",
-    "prettier": "^3.3.2",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "@types/node": "^20.12.12",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
+    "@typescript-eslint/parser": "^7.9.0",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.21.3",
+    "esbuild-plugin-solid": "^0.6.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-no-only-tests": "^3.1.0",
+    "jsdom": "^24.0.0",
+    "prettier": "3.0.0",
+    "solid-js": "^1.8.17",
+    "tsup": "^8.0.2",
+    "tsup-preset-solid": "^2.2.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vite-plugin-solid": "^2.10.2",
+    "@cdek-it/widget": "^3.11.1",
+    "vitest": "^1.6.0"
+  },
+  "keywords": [
+    "solid"
+  ],
+  "packageManager": "pnpm@9.1.1",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9.0.0"
   }
 }
