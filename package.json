@@ -74,7 +74,9 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
     "vite-plugin-solid": "^2.10.2",
-    "vitest": "^1.6.0"
+    "vitest": "^1.6.0",
+    "@yandex/ymaps3-types": "^1.0.16966980",
+    "yup": "^1.6.1"
   },
   "keywords": [
     "solid"

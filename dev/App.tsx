@@ -1,8 +1,8 @@
 import { createEffect, createSignal, type Component } from 'solid-js';
 import CdekWidget from "src/widget";
-import { iWidget, Widget, WidgetSchema } from 'src/widget/cdek-widget';
+import { iWidget, Widget } from 'src/widget/cdek-widget';
 
-const widgetConfig: WidgetSchema = {
+const widgetConfig: Partial<iWidget> = {
     debug: false,
     onReady: () => console.log('Widget is ready'),
     onChoose: (delivery, rate, address) => {

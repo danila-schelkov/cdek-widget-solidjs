@@ -6,7 +6,7 @@ type CdekWidgetProps = {
     config?: Partial<iWidget>;
 };
 
-const defaultConfig: iWidget = {
+const defaultConfig: Partial<iWidget> = {
     apiKey: import.meta.env.VITE_YANDEX_MAPS_API_KEY,
     canChoose: true, //
     servicePath: 'https://widget.cdek.ru/service.php',
@@ -18,7 +18,7 @@ const defaultConfig: iWidget = {
     currency: "RUB",
 };
 
-const createWidget = (signal: Signal<Widget | undefined>, config: iWidget): Signal<Widget | undefined> => {
+const createWidget = (signal: Signal<Widget | undefined>, config: Partial<iWidget>): Signal<Widget | undefined> => {
     // Create a ref to store the widget instance
     const widgetSignal = signal;
 
@@ -73,7 +73,7 @@ export { createWidget };
 
 const CdekWidget: Component<CdekWidgetProps> = (props) => {
     // Widget configuration
-    const config: iWidget = {
+    const config: Partial<iWidget> = {
         ...defaultConfig,
         ...props.config,
     };

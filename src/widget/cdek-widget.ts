@@ -83,9 +83,9 @@ export type iTariff = {
     delivery_sum: number;
 }
 
-export type iWidget = InferType<typeof WidgetSchema> & {
-    goods?: iParcel[];
-    offices?: iOffice[] | null;
+export type iWidget = InferType<typeof widgetSchema> & {
+    goods: iParcel[];
+    offices: iOffice[] | null;
     defaultLocation: string | LngLat;
     lang: Lang;
     onCalculate?: tCalculateFunction;
@@ -146,7 +146,7 @@ export declare class Widget {
     private init;
 }
 
-export declare const WidgetSchema: ObjectSchema<{
+export declare const widgetSchema: ObjectSchema<{
     /** API key for Yandex Maps */
     apiKey: string;
     /** Id of widget element */
@@ -276,8 +276,6 @@ export declare const WidgetSchema: ObjectSchema<{
         office: null;
     };
 }, "">;
-
-export type WidgetSchema = typeof WidgetSchema;
 
 export const enum YandexGeocoderKind {
     OTHER = "other",
