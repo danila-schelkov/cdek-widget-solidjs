@@ -1,37 +1,30 @@
-import { Component, onCleanup, onMount } from "solid-js";
+import { Component, onCleanup, onMount, Signal } from "solid-js";
 import { iWidget, Lang, Widget } from "./cdek-widget";
 
-type CdekWidgetProps = Partial<iWidget>;
+type CdekWidgetProps = {
+    signal: Signal<Widget | undefined>;
+    config?: Partial<iWidget>;
+};
 
 const defaultConfig: iWidget = {
     apiKey: import.meta.env.VITE_YANDEX_MAPS_API_KEY,
     canChoose: true, //
     servicePath: 'https://widget.cdek.ru/service.php',
-    debug: true,
+    debug: import.meta.env.DEV,
     defaultLocation: 'Санкт-Петербург',
     lang: Lang.RUS,
     popup: false,
     root: "cdek-map",
     currency: "RUB",
-    onReady: () => console.log('Widget is ready'),
-    onChoose: (delivery, rate, address) => {
-        console.log(delivery, rate, address);
-    },
 };
 
-const CdekWidget: Component<CdekWidgetProps> = (props) => {
+const createWidget = (signal: Signal<Widget | undefined>, config: iWidget): Signal<Widget | undefined> => {
     // Create a ref to store the widget instance
-    let widget: Widget;
+    const widgetSignal = signal;
 
     // Function to log errors
     const logError = (message: string, error: any) => {
         console.error(message, error);
-    };
-
-    // Widget configuration
-    const config: iWidget = {
-        ...defaultConfig,
-        ...props,
     };
 
     // Function to initialize the CDEK widget
@@ -40,7 +33,7 @@ const CdekWidget: Component<CdekWidgetProps> = (props) => {
         if (window.CDEKWidget) {
             try {
                 // @ts-ignore
-                widget = new window.CDEKWidget(config);
+                widgetSignal[1](new window.CDEKWidget(config));
             } catch (error) {
                 logError('Error initializing CDEK Widget:', error);
             }
@@ -72,6 +65,20 @@ const CdekWidget: Component<CdekWidgetProps> = (props) => {
             script.remove();
         });
     });
+
+    return widgetSignal;
+};
+
+export { createWidget };
+
+const CdekWidget: Component<CdekWidgetProps> = (props) => {
+    // Widget configuration
+    const config: iWidget = {
+        ...defaultConfig,
+        ...props.config,
+    };
+
+    createWidget(props.signal, config);
 
     return (
         <div id="cdek-map" style="width: 100%; height: 600px;" />

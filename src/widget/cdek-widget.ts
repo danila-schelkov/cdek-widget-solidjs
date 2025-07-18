@@ -83,7 +83,7 @@ export type iTariff = {
     delivery_sum: number;
 }
 
-export type iWidget = InferType<typeof widgetSchema> & {
+export type iWidget = InferType<typeof WidgetSchema> & {
     goods?: iParcel[];
     offices?: iOffice[] | null;
     defaultLocation: string | LngLat;
@@ -146,7 +146,7 @@ export declare class Widget {
     private init;
 }
 
-export declare const widgetSchema: ObjectSchema<{
+export declare const WidgetSchema: ObjectSchema<{
     /** API key for Yandex Maps */
     apiKey: string;
     /** Id of widget element */
@@ -203,30 +203,30 @@ export declare const widgetSchema: ObjectSchema<{
         weight: number;
     }[];
     from?: string | {
-        code: number | null;
-        postal_code: string | null;
-        country_code: string | null;
-        city: string | null;
-        address: string | null;
+        code?: number | null;
+        postal_code?: string | null;
+        country_code?: string | null;
+        city?: string | null;
+        address?: string | null;
     } | null;
     /** Default address */
     defaultLocation: NonNullable<string | LngLat | undefined>;
     /** Widget language */
-    lang: Lang;
-    currency: string;
+    lang?: Lang;
+    currency?: string;
     tariffs?: {
-        door: any[];
-        office: any[];
-        pickup: any[];
+        door?: any[];
+        office?: any[];
+        pickup?: any[];
     };
     // Function called after the widget finishes loading
-    onReady: tReadyFunction | undefined;
-    onCalculate: tCalculateFunction | undefined;
+    onReady?: tReadyFunction | undefined;
+    onCalculate?: tCalculateFunction | undefined;
     // Function called after the customer selects a pickup point
-    onChoose: tChooseFunction | undefined;
+    onChoose?: tChooseFunction | undefined;
     selected?: {
-        door: string | null;
-        office: string | null;
+        door?: string | null;
+        office?: string | null;
     };
 }, AnyObject, {
     apiKey: any;
@@ -276,6 +276,8 @@ export declare const widgetSchema: ObjectSchema<{
         office: null;
     };
 }, "">;
+
+export type WidgetSchema = typeof WidgetSchema;
 
 export const enum YandexGeocoderKind {
     OTHER = "other",
