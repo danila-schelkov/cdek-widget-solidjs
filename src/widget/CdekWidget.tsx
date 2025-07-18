@@ -1,7 +1,25 @@
 import { Component, onCleanup, onMount } from "solid-js";
-import Widget from "types/cdek-widget.es";
+import { iWidget, Lang, Widget } from "./cdek-widget";
 
-const CdekWidget: Component<{}> = () => {
+type CdekWidgetProps = Partial<iWidget>;
+
+const defaultConfig: iWidget = {
+    apiKey: import.meta.env.VITE_YANDEX_MAPS_API_KEY,
+    canChoose: true, //
+    servicePath: 'https://widget.cdek.ru/service.php',
+    debug: true,
+    defaultLocation: 'Санкт-Петербург',
+    lang: Lang.RUS,
+    popup: false,
+    root: "cdek-map",
+    currency: "RUB",
+    onReady: () => console.log('Widget is ready'),
+    onChoose: (delivery, rate, address) => {
+        console.log(delivery, rate, address);
+    },
+};
+
+const CdekWidget: Component<CdekWidgetProps> = (props) => {
     // Create a ref to store the widget instance
     let widget: Widget;
 
@@ -11,33 +29,10 @@ const CdekWidget: Component<{}> = () => {
     };
 
     // Widget configuration
-    const getWidgetConfig = () => ({
-        apiKey: process.env.YANDEX_MAPS_API_KEY, // API key for Yandex Maps
-        canChoose: true, // Ability to choose the pickup point
-        servicePath: 'http://localhost:8000/service.php', // Path to the PHP file
-        hideFilters: {
-            have_cashless: false, // Control visibility of the "Cashless Payment" filter
-            have_cash: false, // Control visibility of the "Cash Payment" filter
-            is_dressing_room: true, // Control visibility of the "Dressing Room Available" filter
-            type: true, // Display the "Pickup Point Type" filter
-        },
-        debug: true, // Enable debug information output
-        defaultLocation: 'Санкт-Петербург', // Default address
-        lang: 'rus', // Widget language
-        hideDeliveryOptions: {
-            office: false, // Ability to choose delivery to the pickup point
-            door: true, // Hide delivery to the door
-        },
-        popup: false, // Open the widget in a modal window
-        root: "cdek-map",  // id of map element
-
-        // Function called after the widget finishes loading
-        onReady: () => console.log('Widget is ready'),
-        // Function called after the customer selects a pickup point
-        onChoose: (delivery: string, rate: string, address: string) => {
-            console.log(delivery, rate, address);
-        },
-    });
+    const config: iWidget = {
+        ...defaultConfig,
+        ...props,
+    };
 
     // Function to initialize the CDEK widget
     const intializeWidget = () => {
@@ -45,7 +40,7 @@ const CdekWidget: Component<{}> = () => {
         if (window.CDEKWidget) {
             try {
                 // @ts-ignore
-                widget = new window.CDEKWidget(getWidgetConfig());
+                widget = new window.CDEKWidget(config);
             } catch (error) {
                 logError('Error initializing CDEK Widget:', error);
             }
@@ -74,7 +69,7 @@ const CdekWidget: Component<{}> = () => {
         };
 
         onCleanup(() => {
-            script?.remove();
+            script.remove();
         });
     });
 

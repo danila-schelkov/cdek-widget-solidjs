@@ -1,7 +1,8 @@
-import type { Component } from 'solid-js'
-import logo from './logo.svg'
-import styles from './App.module.css'
-import { Hello } from "~/Hello"
+import type { Component } from 'solid-js';
+import logo from './logo.svg';
+import styles from './App.module.css';
+import { Hello } from "src/Hello";
+import CdekWidget from "src/widget";
 
 const App: Component = () => {
     return (
@@ -24,6 +25,7 @@ const App: Component = () => {
                         Learn Solid
                     </a>
                 </header>
+                <CdekWidget />
             </div>
         </>
     )
