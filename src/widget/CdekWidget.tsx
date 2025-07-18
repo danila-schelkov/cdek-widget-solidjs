@@ -1,8 +1,8 @@
-import { Component, onCleanup, onMount, Signal } from "solid-js";
+import { Component, createSignal, onCleanup, onMount, Signal } from "solid-js";
 import { iWidget, Lang, Widget } from "./cdek-widget";
 
 type CdekWidgetProps = {
-    signal: Signal<Widget | undefined>;
+    signal?: Signal<Widget | undefined>;
     config?: Partial<iWidget>;
 };
 
@@ -18,9 +18,9 @@ const defaultConfig: Partial<iWidget> = {
     currency: "RUB",
 };
 
-const createWidget = (signal: Signal<Widget | undefined>, config: Partial<iWidget>): Signal<Widget | undefined> => {
+const createWidget = (signal: Signal<Widget | undefined> | undefined, config: Partial<iWidget>): Signal<Widget | undefined> => {
     // Create a ref to store the widget instance
-    const widgetSignal = signal;
+    const widgetSignal = signal || createSignal<Widget>();
 
     // Function to log errors
     const logError = (message: string, error: any) => {
@@ -84,5 +84,7 @@ const CdekWidget: Component<CdekWidgetProps> = (props) => {
         <div id="cdek-map" style="width: 100%; height: 600px;" />
     );
 };
+
+export { CdekWidget };
 
 export default CdekWidget;
