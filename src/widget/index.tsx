@@ -1,4 +1,4 @@
-import CdekWidget from "./CdekWidget";
+import CdekWidget from './CdekWidget'
 
-export * from "./CdekWidget";
-export default CdekWidget;
+export * from './CdekWidget'
+export default CdekWidget
